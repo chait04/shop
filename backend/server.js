@@ -1,5 +1,11 @@
-const express = require("express");
-const products = require("./data/products");
+import express from "express";
+import dotenv from "dotenv";
+// you need to add .js as extension if you're using modules
+import products from "./data/products.js";
+
+const port = process.env.PORT || 5000;
+
+dotenv.config();
 
 const app = express();
 
@@ -16,4 +22,7 @@ app.get("/api/products/:id", (req, res) => {
   res.json(product);
 });
 
-app.listen(5000, console.log(`Its connected`));
+app.listen(
+  port,
+  console.log(`Baee is running on ${process.env.NODE_ENV} , on port ${port}`)
+);
