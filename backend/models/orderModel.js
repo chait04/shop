@@ -19,23 +19,54 @@ const orderSchema = new mongoose.Schema(
           required: true,
           ref: "Product",
         },
-        // left here resuume at 10:20
       },
     ],
-    email: {
-      type: String,
-      required: true,
-      unique: true,
+    shippingAddress: {
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
     },
-    password: {
+    paymentMethod: {
       type: String,
       required: true,
-      unique: true,
     },
-    isAdmin: {
+    paymentResult: {
+      id: { type: String },
+      status: { type: String },
+      update_time: { type: String },
+      email_address: { type: String },
+    },
+    taxPrice: {
       type: String,
       required: true,
-      default: false,
+      default: 0.0,
+    },
+    taxPrice: {
+      type: String,
+      required: true,
+      default: 0.0,
+    },
+    totalPrice: {
+      type: String,
+      required: true,
+      default: 0.0,
+    },
+    isPaid: {
+      type: String,
+      required: true,
+      default: 0.0,
+    },
+    paidAt: {
+      type: Date,
+    },
+    isDelivered: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
+    deliveredAt: {
+      type: Date,
     },
   },
   {
@@ -43,6 +74,6 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-const user = mongoose.model("user", userSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 export default user;
