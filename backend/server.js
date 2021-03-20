@@ -2,10 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 // you need to add .js as extension if you're using modules
 import products from "./data/products.js";
+import connectDB from "./config/db.js";
+import colors from "colors";
 
 const port = process.env.PORT || 5000;
 
 dotenv.config();
+
+connectDB();
 
 const app = express();
 
@@ -24,5 +28,7 @@ app.get("/api/products/:id", (req, res) => {
 
 app.listen(
   port,
-  console.log(`Baee is running on ${process.env.NODE_ENV} , on port ${port}`)
+  console.log(
+    `Baee is running on ${process.env.NODE_ENV} , on port ${port}`.yellow.bold
+  )
 );
