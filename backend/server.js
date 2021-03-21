@@ -1,17 +1,21 @@
 import express from "express";
 import dotenv from "dotenv";
 // you need to add .js as extension if you're using modules
-import products from "./data/products.js";
+// import products from "./data/products.js";
 import connectDB from "./config/db.js";
 import colors from "colors";
 
-const port = process.env.PORT || 5000;
+import productRoutes from "./routes/productRoutes.js";
+
+const port = process.env.PORT || 80;
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
+
+app.use("/api/products", productRoutes);
 
 app.get("/", (req, res) => {
   res.send(`API is running.....`);
@@ -29,6 +33,7 @@ app.get("/api/products/:id", (req, res) => {
 app.listen(
   port,
   console.log(
-    `Baee is running on ${process.env.NODE_ENV} , on port ${port}`.yellow.bold
+    `Baee is running on ${process.env.NODE_ENV} , with ${port} others`.yellow
+      .bold
   )
 );
